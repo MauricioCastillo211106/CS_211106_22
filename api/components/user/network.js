@@ -3,7 +3,8 @@ import { Router } from "express";
 
 // Importaciones
 import { success as _success } from "../../../network/response.js";
-import getConnection from "../../../model/db.js";
+import {getData} from "../../../model/db.js";
+import { getUsers } from "../../../model/users.js";
 
 // Inicialización dependencias
 const router = Router();
@@ -115,6 +116,16 @@ router.post("/login", function (req, res) {
     id_user: "id_user",
     success: "ok",
   });
+});
+
+router.get('/all_users_orm', async function(req, res){
+  getUsers.findAll({attributes: ['username', 'email', 'password', 'phone_number']})
+  .then(users =>{
+    res.send(users)
+  })
+  .catch(err => {
+    console.log(err)
+  })
 });
 
 export default router;

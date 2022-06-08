@@ -1,8 +1,9 @@
 //db.Js
-import pkg from 'pg'
-const { Pool }  = pkg;
+import pkg from "pg";
+import Sequelize from "sequelize";
 import { db } from "../config.js";
 
+const { Pool } = pkg;
 async function getConnection() {
   const client = new Pool({
     user: db.user,
@@ -15,4 +16,18 @@ async function getConnection() {
 
   return client;
 }
-export default  getConnection ;
+
+const SequelizeClient = new Sequelize(db.database, db.user, db.password, {
+  host: db.host,
+  dialect: "postgres",
+});
+
+SequelizeClient.authenticate()
+  .then(() => {
+    console.log("conectado");
+  })
+  .catch(() => {
+    console.log("no se conecto");
+  });
+
+export const getData = { getConnection, SequelizeClient };
