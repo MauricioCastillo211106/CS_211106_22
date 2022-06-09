@@ -18,6 +18,12 @@ async function getConnection() {
 }
 
 const SequelizeClient = new Sequelize(db.database, db.user, db.password, {
+  dialectOptions:{
+    ssl:{
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
   host: db.host,
   dialect: "postgres",
 });
@@ -26,8 +32,8 @@ SequelizeClient.authenticate()
   .then(() => {
     console.log("conectado");
   })
-  .catch(() => {
-    console.log("no se conecto");
+  .catch((err) => {
+    console.log("no se conecto", err);
   });
 
 export const getData = { getConnection, SequelizeClient };

@@ -3,7 +3,7 @@ import { Router } from "express";
 
 // Importaciones
 import { success as _success } from "../../../network/response.js";
-import {getData} from "../../../model/db.js";
+import { getData } from "../../../model/db.js";
 import { getUsers } from "../../../model/users.js";
 
 // Inicialización dependencias
@@ -25,7 +25,7 @@ var corsOp = function (req, callback) {
 // Get
 router.get("/list", async function (req, res) {
   console.log("Hola");
-  const client = await getConnection();
+  const client = await getData();
 
   const query_request = {
     text: "select * from tbl_usersdb order by id",
@@ -118,24 +118,28 @@ router.post("/login", function (req, res) {
   });
 });
 //Get Sequelize
-router.get('/all_users_orm', async function(req, res){
-  getUsers.findAll({attributes: ['id','username', 'email', 'password', 'phone_number']})
-  .then(users =>{
-    res.send(users)
-  })
-  .catch(err => {
-    console.log(err)
-  })
+router.get("/all_users_orm", async function (req, res) {
+  getUsers
+    .findAll({
+      attributes: ["id", "username"],
+    })
+    .then((users) => {
+      res.send(users);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
-//Delete Using Sequelize 
-router.delete('/delete_user_orm', async function(req, res){
-let id = req.query.id;
-console.log("id:" + req.query.id);
- getUsers.destroy({
-  where: {
-    id: id
-  }
-})
+//Delete Using Sequelize
+router.delete("/delete_user_orm", async function (req, res) {
+  let id = req.query.id;
+  console.log("id:" + req.query.id);
+  getUsers
+    .destroy({
+      where: {
+        id: id,
+      },
+    })
     .then((r) => {
       _success(req, res, r, 200);
     })
@@ -145,38 +149,39 @@ console.log("id:" + req.query.id);
 });
 
 //update using Sequelize
-router.put('/update_user_orm', async function(req,res){
-  let id= req.query.id;
-  let newDatas=req.query;
-  getUsers.findOne({where:{id:id}})
-  .then((r) => {
-    r.update(newDatas)
-    _success(req, res, r, 200);
-    console.log('simon')
-  })
-  .catch((e) => {
-    _success(req, res, e, 400);
-    console.log('mal')
-  });
-})
+router.put("/update_user_orm", async function (req, res) {
+  let id = req.query.id;
+  let newDatas = req.query;
+  getUsers
+    .findOne({ where: { id: id } })
+    .then((r) => {
+      r.update(newDatas);
+      _success(req, res, r, 200);
+      console.log("simon");
+    })
+    .catch((e) => {
+      _success(req, res, e, 400);
+      console.log("mal");
+    });
+});
 
 //post Sequelize
-router.post('/register_user_orm',async function(req,res){
-  getUsers.create({
-    id: req.query.id,
-  username: req.query.username,
-  email:req.query.email,
-   password:req.query.password,
-   phone_number: req.query.phone_number
-
-  })    .then((r) => {
-    _success(req, res, r, 200);
-    console.log('simon')
-  })
-  .catch((e) => {
-    _success(req, res, e, 400);
-  });
-
-  })
+router.post("/register_user_orm", async function (req, res) {
+  getUsers
+    .create({
+      id: req.query.id,
+      username: req.query.username,
+      email: req.query.email,
+      password: req.query.password,
+      phone_number: req.query.phone_number,
+    })
+    .then((r) => {
+      _success(req, res, r, 200);
+      console.log("simon");
+    })
+    .catch((e) => {
+      _success(req, res, e, 400);
+    });
+});
 
 export default router;
