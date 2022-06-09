@@ -2,7 +2,7 @@ import { getData } from "./db.js";
 import Sequelize from "sequelize";
 
 const user = getData.SequelizeClient.define(
-  "tbl_usersdb",
+  'tbl_usersdb',
   {
     id: { type: Sequelize.SMALLINT, primaryKey: true },
     username: Sequelize.STRING,
@@ -12,6 +12,8 @@ const user = getData.SequelizeClient.define(
   },
   {
     tableName: "tbl_usersdb",
+    createdAt:false,
+    updatedAt:false,
   }
 );
 
