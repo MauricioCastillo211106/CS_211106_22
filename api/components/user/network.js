@@ -171,9 +171,7 @@ router.post("/register_user_orm", async function (req, res) {
     .create({
       id: req.query.id,
       username: req.query.username,
-      email: req.query.email,
-      password: req.query.password,
-      phone_number: req.query.phone_number,
+
     })
     .then((r) => {
       _success(req, res, r, 200);
