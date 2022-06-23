@@ -9,14 +9,14 @@ const data = dotenv.config({
 })
 
 export const db = {
-    user: data.parsed.USER,
-    host: data.parsed.HOST,
-    database: data.parsed.DATABASE,
-    password: data.parsed.PASSWORD,
+    user: process.env.USERS,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
 };
 
 export const api = {
-    port: data.parsed.PORT,
+    port: process.env.PORT,
 };
 // export const db = {
 //   user: "ysisandlpbolnl",

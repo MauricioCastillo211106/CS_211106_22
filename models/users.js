@@ -1,8 +1,9 @@
 import {getData} from './db.js';
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
+import { getProfile } from './Profile.js';
 
-const User = getData.sequelizeClient.define('cat_profiles',{
+const User = getData.sequelizeClient.define('cat_user',{
     id:{
         type: DataTypes.UUID,
         defaultvalue: DataTypes.UUIDV4,
@@ -29,9 +30,9 @@ const User = getData.sequelizeClient.define('cat_profiles',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    phone_number: DataTypes.STRING,
+    phone_number:{type: DataTypes.NUMERIC},
 },{
-    tableName: 'cat_profiles',
+    tableName: 'cat_user',
     freezeTableName: true,
     hooks: {
         beforeCreate: (user, options) =>{
@@ -41,5 +42,11 @@ const User = getData.sequelizeClient.define('cat_profiles',{
         }
     }
 });
+
+User.hasMany(getProfile,{
+    foreignkey:'id'
+});
+getProfile.belongsTo(User);
+
 
 export const getUsers = User;

@@ -1,0 +1,5 @@
+# dotenv environments 
+.env
+*.env.development
+*.env.production
+*.en.test
