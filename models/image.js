@@ -1,6 +1,6 @@
-import { getData } from "./db.js";
-import { DataTypes } from "sequelize";
-import bcrypt from 'bcrypt';
+import {getData} from './db.js';
+import { DataTypes } from 'sequelize';
+
 
 const img = getData.sequelizeClient.define('cat_img',{
     id:{
@@ -13,17 +13,6 @@ const img = getData.sequelizeClient.define('cat_img',{
         type: DataTypes.STRING,
         allowNull: true
     }
-},{
-    tableName: 'cat_img',
-    freezeTableName: true,
-    hooks: {
-        beforeCreate: (user, options) =>{
-            {
-                user.password = user.password && user.password != "" ? bcrypt.hashSync(user.password,10):"";
-            }
-        }
-    }
 });
-
 
 export const getImg = img;

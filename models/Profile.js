@@ -2,6 +2,7 @@ import {getData} from './db.js';
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
 
+
 const profile = getData.sequelizeClient.define('cat_profile',{
     id:{
         type: DataTypes.UUID,
@@ -41,5 +42,4 @@ const profile = getData.sequelizeClient.define('cat_profile',{
         }
     }
 });
-
 export const getProfile = profile;

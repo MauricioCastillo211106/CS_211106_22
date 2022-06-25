@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getImg } from "../model/imagen.js";
+import { getImg } from "../models/image.js";
 import multer from 'multer';
 
 const router = Router();

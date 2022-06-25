@@ -74,7 +74,6 @@ router.put("/update_user_orm", async function (req, res) {
 router.post("/register_user_orm", async function (req, res) {
   getUsers
     .create({
-      id: req.query.id,
       username: req.query.username,
 
     })
