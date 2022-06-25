@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { getFather } from "../models/father.js";
 import { getUsers } from "../models/users.js";
-import { getSon } from "../models/soon.js";
+import { getSon } from "../models/son.js";
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 import { getData } from "./db.js";
 import { DataTypes } from "sequelize";
-import Sequelize from 'sequelize';
+
 
 const Soon = getData.sequelizeClient.define ('cat_sons',{
     id: {

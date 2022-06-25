@@ -2,10 +2,10 @@ import {getData} from './db.js';
 import { DataTypes } from 'sequelize';
 
 
-const img = getData.sequelizeClient.define('cat_img',{
+const img = getData.sequelizeClient.define('cat_imgs',{
     id:{
         type: DataTypes.UUID,
-        defaultvalue: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true
     },

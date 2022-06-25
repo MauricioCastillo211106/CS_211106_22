@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getSon } from "../models/soon.js";
+import { getSon } from "../models/son.js";
 
 const router = Router();
 

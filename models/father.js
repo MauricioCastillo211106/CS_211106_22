@@ -1,6 +1,6 @@
 import { getData } from "./db.js";
 import { DataTypes } from "sequelize";
-import { getSon } from "./soon.js";
+import { getSon } from "./son.js";
 
 
 const Father = getData.sequelizeClient.define('cat_father', {
